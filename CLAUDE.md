@@ -31,9 +31,10 @@
 - 출처 없이 추측으로 코드 작성 금지. 모르면 "모른다"고 말하고 리서치한다.
 
 ## Project Structure
-- `design/` — BRD, 리서치 노트, 스펙, 계획 문서
+- `design/` — BRD, 리서치 노트, 스펙, 결정 기록(ADR), 계획 문서
   - `design/research/` — 리서치 노트
   - `design/specs/NNNN-title.md` — 릴리즈/MVP 스펙 (보존)
+  - `design/decisions/NNNN-title.md` — 아키텍처 결정 기록 (ADR, 보존)
   - `design/plans/NNNN-title.md` — 사이클별 구현 계획서 (보존)
 - `src/` — 애플리케이션 코드
 - `tests/` — 테스트 코드

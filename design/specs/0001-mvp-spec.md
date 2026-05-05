@@ -35,10 +35,17 @@
 
 ### 2.3 출처
 
-- **확정 출처 (최소 보장)**:
-  - `https://www.aitimes.com/`
-  - Anthropic 공식 블로그·뉴스
-- **출처 풀 확장**: 추가 후보는 **Cycle 1A** (Strands + AgentCore 리서치) 결과로 결정.
+MVP 5개 출처 (Cycle 1A 결정 — 자세한 fetch 방법은 `design/research/0002-strands-agentcore-news-pattern.md` §3):
+
+| # | 출처 | 언어 | Fetch |
+|---|---|---|---|
+| 1 | `aitimes.com` | 한국어 | RSS |
+| 2 | Anthropic news (`anthropic.com/news`) | 영어 | HTML 스크래핑 (공식 RSS 부재) |
+| 3 | AWS Machine Learning Blog | 영어 | RSS |
+| 4 | OpenAI blog | 영어 | RSS |
+| 5 | Google DeepMind blog | 영어 | RSS |
+
+확장 트리거: 5개 운영 시 분량 부족 통증 발생 시 후속 사이클로 추가.
 
 ### 2.4 비범위 (Out-of-scope)
 
@@ -46,6 +53,7 @@
 - AI 정책·규제 (통증 발생 시 후속 사이클로 이관)
 - 영상·팟캐스트 transcript (텍스트 출처만)
 - Real-time push 채널 (Slack/Discord 등 — 이메일만)
+- AgentCore Memory cross-session — 1인 단발성 푸시라 불필요 (Cycle 1A 결정)
 
 ---
 
@@ -77,6 +85,7 @@
 |---|---|
 | 발송 시각 | 매일 **KST 07:00 ±15분** |
 | 입력 윈도우 | 직전 24시간 (전날 KST 07:00 ~ 당일 KST 07:00) |
+| 트리거 | EventBridge Scheduler universal target → AgentCore Runtime 직접 invoke (2단계, Cycle 1A 결정) |
 
 ---
 
@@ -93,12 +102,13 @@
 
 ## 6. 의존성
 
-| 항목 | 상태 |
-|---|---|
-| 구체 기술 스택 (Strands 사용 패턴) | *open* — Cycle 1A 결과 |
-| 출처 풀 확장 | *open* — Cycle 1A 결과 |
-| AWS Bedrock + AgentCore | *fixed* — BRD `기술 스택` |
-| 이메일 전송 메커니즘 | *open* — 별도 사이클 |
+| 항목 | 상태 | 근거 |
+|---|---|---|
+| 구체 기술 스택 (Strands 사용 패턴) | **resolved** | ADR 0001 + research 0002 |
+| 출처 풀 (5개) | **resolved** | research 0002 §3 |
+| 이메일 전송 메커니즘 | **resolved** | research 0002 §4 (AWS SES sandbox) |
+| 스케줄링 / 트리거 | **resolved** | research 0002 §5 (EventBridge Scheduler universal target) |
+| AWS Bedrock + AgentCore | *fixed* | BRD `기술 스택` |
 
 ---
 
@@ -107,3 +117,4 @@
 | 일자 | 변경 |
 |---|---|
 | 2026-05-05 | v0.1 초안 — Cycle 1B brainstorming 결과 |
+| 2026-05-05 | v0.2 — Cycle 1A 반영: §2.3 5개 출처, §2.4 AgentCore Memory 비목표, §4 트리거 명시, §6 4개 의존성 resolved |
