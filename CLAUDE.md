@@ -3,13 +3,12 @@
 ## Workflow
 - 모든 작업은 4단계 사이클로 진행: 탐색/리서치 → 계획 → 구현 → 검증
 - 단계 전환 시 사용자 승인 필수 (1→2, 2→3, 4 완료)
-- superpowers 스킬 활용:
-  - 1단계: brainstorming
-  - 2단계: writing-plans
-  - 3단계: executing-plans / test-driven-development
-  - 4단계: verification-before-completion
+- 메서돌로지 척추: Superpowers 14 스킬 (외부 SDD 프레임워크 미채택).
+  - 단계별 일차 스킬: 1=brainstorming / 2=writing-plans / 3=executing-plans + test-driven-development / 4=verification-before-completion
+  - 그 외(subagent-driven-development, code-reviewer, systematic-debugging, using-git-worktrees 등)도 필요 시 호출.
 - 한 사이클 = 한 결정/기능 단위. 여러 결정을 묶지 않는다.
 - 점진적 확장 원칙: MVP 후 작은 사이클 반복. YAGNI 준수.
+- 메서돌로지 형식화도 통증 기반: 추가 표기법·템플릿·외부 SDD 도구는 *실제 통증 발생 시* 한 가지씩 도입한다. 사전 박제 금지. 후보 풀은 `design/research/0001-spec-driven-development.md` 참조.
 
 ## Review Cadence
 - 검토할 항목이 여러 개일 때, 터미널에 한 번에 하나씩 제시한다.
@@ -32,8 +31,9 @@
 - 출처 없이 추측으로 코드 작성 금지. 모르면 "모른다"고 말하고 리서치한다.
 
 ## Project Structure
-- `design/` — BRD, 리서치 노트, 계획 문서
+- `design/` — BRD, 리서치 노트, 스펙, 계획 문서
   - `design/research/` — 리서치 노트
+  - `design/specs/NNNN-title.md` — 릴리즈/MVP 스펙 (보존)
   - `design/plans/NNNN-title.md` — 사이클별 구현 계획서 (보존)
 - `src/` — 애플리케이션 코드
 - `tests/` — 테스트 코드
